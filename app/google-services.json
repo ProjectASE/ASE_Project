@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "596464899059",
+    "project_id": "aseproject-f217a",
+    "storage_bucket": "aseproject-f217a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596464899059:android:102ea4fff84e86f518f886",
+        "android_client_info": {
+          "package_name": "com.example.aseproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596464899059-dh8a5dlkhr1krosk2otvoe1jc0scns0l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClg9ueyJH777Y3u7ROqVedz-cp0j7JIew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596464899059-dh8a5dlkhr1krosk2otvoe1jc0scns0l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
