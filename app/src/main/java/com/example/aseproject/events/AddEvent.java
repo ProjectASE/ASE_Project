@@ -13,13 +13,16 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.aseproject.R;
 import com.example.aseproject.UserHomepage;
+import com.example.aseproject.events.model.Event;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,14 +65,10 @@ public class AddEvent extends AppCompatActivity {
                 }
 
                 // save event
-                DocumentReference docref = fStore.collection("Events").document(user.getUid()).collection("myEvents").document();
-                Map<String,Object> event = new HashMap<>();
-                event.put("title",eTitle);
-                event.put("location",eLocation);
-                event.put("time",eTime);
-                event.put("date",eDate);
-                event.put("description",eDescription);
-                docref.set(event).addOnSuccessListener(new OnSuccessListener<Void>() {
+                CollectionReference colref = fStore.collection("Events").document(user.getUid()).collection("myEvents");
+                String eId = colref.document().getId();
+                Event event = new Event(eId,eTitle, eLocation, eTime, eDate, eDescription);
+                colref.document(eId).set(event).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(AddEvent.this, "Event Added.", Toast.LENGTH_SHORT).show();

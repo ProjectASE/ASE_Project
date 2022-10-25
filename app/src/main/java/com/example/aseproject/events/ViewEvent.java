@@ -74,7 +74,7 @@ public class ViewEvent extends AppCompatActivity {
                 eventViewHolder.eventDescription.setText(event.getDescription());
                 final int code = getRandomColor();
                 eventViewHolder.eCardView.setCardBackgroundColor(eventViewHolder.view.getResources().getColor(code,null));
-                final String docId = eventAdapter.getSnapshots().getSnapshot(i).getId();
+
 
                 eventViewHolder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -85,7 +85,7 @@ public class ViewEvent extends AppCompatActivity {
                         i.putExtra("time",event.getTime());
                         i.putExtra("date",event.getDate());
                         i.putExtra("description",event.getDescription());
-                        i.putExtra("eventId",docId);
+                        i.putExtra("eventId",event.getId());
                         v.getContext().startActivity(i);
                     }
                 });

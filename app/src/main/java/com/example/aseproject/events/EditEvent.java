@@ -38,20 +38,20 @@ public class EditEvent extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         fStore = fStore.getInstance();
-        editEventTitle = findViewById(R.id.eventTitle);
-        editEventLocation = findViewById(R.id.eventLocation);
-        editEventTime = findViewById(R.id.eventTime);
-        editEventDate = findViewById(R.id.eventDate);
-        editEventDescription = findViewById(R.id.eventDescription);
+        editEventTitle = findViewById(R.id.editEventTitle);
+        editEventLocation = findViewById(R.id.editEventLocation);
+        editEventTime = findViewById(R.id.editEventTime);
+        editEventDate = findViewById(R.id.editEventDate);
+        editEventDescription = findViewById(R.id.editEventDescription);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         data = getIntent();
 
         String eventTitle = data.getStringExtra("title");
-        String eventLocation = data.getStringExtra("eventLocation");
-        String eventTime = data.getStringExtra("eventTime");
-        String eventDate = data.getStringExtra("eventDate");
-        String eventDescription = data.getStringExtra("eventDescription");
+        String eventLocation = data.getStringExtra("location");
+        String eventTime = data.getStringExtra("time");
+        String eventDate = data.getStringExtra("date");
+        String eventDescription = data.getStringExtra("description");
 
         editEventTitle.setText(eventTitle);
         editEventLocation.setText(eventLocation);
@@ -129,7 +129,7 @@ public class EditEvent extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(EditEvent.this, EventManagement.class);
+        Intent intent = new Intent(EditEvent.this, ViewEvent.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();

@@ -46,6 +46,12 @@ public class EventDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(),EditEvent.class);
+                i.putExtra("title",data.getStringExtra("title"));
+                i.putExtra("location",data.getStringExtra("location"));
+                i.putExtra("time",data.getStringExtra("time"));
+                i.putExtra("date",data.getStringExtra("date"));
+                i.putExtra("description",data.getStringExtra("description"));
+                i.putExtra("eventId",data.getStringExtra("eventId"));
                 startActivity(i);
             }
         });

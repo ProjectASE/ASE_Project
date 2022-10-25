@@ -10,7 +10,7 @@
     tools:showIn="@layout/activity_event_edit">
 
     <EditText
-        android:id="@+id/eventDetailsLocation"
+        android:id="@+id/editEventLocation"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
@@ -23,7 +23,7 @@
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/eventDetailsTime"
+        android:id="@+id/editEventTime"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
@@ -35,7 +35,7 @@
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/eventDetailsDate"
+        android:id="@+id/editEventDate"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
@@ -46,7 +46,7 @@
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/eventDetailsDescription"
+        android:id="@+id/editEventDescription"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
