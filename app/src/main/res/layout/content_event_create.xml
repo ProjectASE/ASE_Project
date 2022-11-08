@@ -10,20 +10,19 @@
     tools:showIn="@layout/activity_event_create">
 
     <EditText
-        android:id="@+id/eventLocation"
+        android:id="@+id/eventTitle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="80dp"
-        android:hint="Event Location"
+        android:hint="Event Title"
         android:inputType="text"
         android:padding="15dp"
-        android:textSize="15sp" />
+        android:textSize="15sp"/>
 
-    <EditText
-        android:id="@+id/eventTime"
+    <TextView
+        android:id="@+id/timeTextView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
@@ -32,15 +31,32 @@
         android:hint="Event Time"
         android:inputType="text"
         android:padding="15dp"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:onClick="onTimeClick"
+        android:clickable="true"/>
 
-    <EditText
-        android:id="@+id/eventDate"
+    <TextView
+        android:id="@+id/dateTextView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Date"
+        android:layout_marginBottom="10dp"
+        android:hint="Event Date"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textSize="15sp"
+        android:onClick="onDateClick"
+        android:clickable="true"/>
+
+    <EditText
+        android:id="@+id/eventLocation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Event Location"
         android:inputType="text"
         android:padding="15dp"
         android:textSize="15sp" />

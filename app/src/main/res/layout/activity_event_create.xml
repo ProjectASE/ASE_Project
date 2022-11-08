@@ -6,31 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".events.AddEvent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary">
-
-            <EditText
-                android:id="@+id/eventTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="@android:string/untitled"
-                android:textColor="#808080"
-                android:textColorHint="#FFFFFF"
-                android:textStyle="bold" />
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <include layout="@layout/content_event_create" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

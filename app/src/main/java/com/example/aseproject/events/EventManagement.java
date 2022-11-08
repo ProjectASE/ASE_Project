@@ -10,14 +10,19 @@ import com.example.aseproject.MainActivity;
 import com.example.aseproject.R;
 import com.example.aseproject.UserHomepage;
 
+import java.time.LocalDate;
+
 public class EventManagement extends AppCompatActivity {
 
-    public String stuTP,stuDegreeField,stuName, stuEmail, stuPhoneNumber;
+    public String localDate,localMonth,localYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_management);
+        localDate = String.valueOf(LocalDate.now().getDayOfMonth());
+        localMonth = String.valueOf(LocalDate.now().getMonth().getValue());
+        localYear= String.valueOf(LocalDate.now().getYear());
     }
 
     public void onCreateEventCardViewClick(View view) {
@@ -28,7 +33,10 @@ public class EventManagement extends AppCompatActivity {
     }
 
     public void onViewCreatedEventCardViewClick(View view) {
-        Intent intent = new Intent(EventManagement.this, ViewEvent.class);
+        Intent intent = new Intent(EventManagement.this, ViewEvent.class)
+                .putExtra("date", localDate)
+                .putExtra("month", localMonth)
+                .putExtra("year", localYear);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
@@ -43,10 +51,4 @@ public class EventManagement extends AppCompatActivity {
         finish();
     }
 
-    public void onLogoutCustomer(View view) {
-        Intent intent = new Intent(EventManagement.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
 }
