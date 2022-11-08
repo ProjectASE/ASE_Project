@@ -11,18 +11,24 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.aseproject.events.EventManagement;
+import com.example.aseproject.notes.NotesManagement;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class UserHomepage extends AppCompatActivity {
 
     TextView emailManagementView;
     TextView eventManagementView;
+    TextView notesManagementView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_homepage);
 
         emailManagementView = findViewById(R.id.emailManagement);
+        eventManagementView = findViewById(R.id.eventManagement);
+        notesManagementView = findViewById(R.id.notesManagement);
+
+
         emailManagementView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,11 +36,17 @@ public class UserHomepage extends AppCompatActivity {
             }
         });
 
-        eventManagementView = findViewById(R.id.eventManagement);
         eventManagementView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openEventManagement();
+            }
+        });
+
+        notesManagementView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openNotesManagement();
             }
         });
 
@@ -46,6 +58,10 @@ public class UserHomepage extends AppCompatActivity {
 
     private void openEventManagement() {
         startActivity(new Intent(UserHomepage.this, EventManagement.class));
+    }
+
+    private void openNotesManagement() {
+        startActivity(new Intent(UserHomepage.this, NotesManagement.class));
     }
 
     public void signUserOut() {

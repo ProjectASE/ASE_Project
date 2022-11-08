@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".notes.ShowNote"
+    android:background="#ff0000">
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+    </Button>
+
+    <EditText
+        android:id="@+id/noteField"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/saveButton"
+        android:background="#fbefbe"
+        android:layout_marginTop="50dp"
+        android:gravity="top">
+
+
+    </EditText>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

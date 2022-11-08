@@ -15,6 +15,20 @@
         android:theme="@style/Theme.AseProject"
         tools:targetApi="31">
         <activity
+            android:name=".notes.ShowNote"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".notes.NotesManagement"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".EmailManagementView"
             android:exported="false">
             <meta-data
