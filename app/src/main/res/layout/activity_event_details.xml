@@ -4,35 +4,155 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DCDCF2"
     tools:context=".events.EventDetails">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_event_details" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:layout_anchor="@+id/appBarLayout"
-        app:layout_anchorGravity="center">
-
-        <TextView
-            android:id="@+id/eventDetailsTitle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Title"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </androidx.appcompat.widget.Toolbar>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/top_background" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-100dp"
+                    android:text="Event Management"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_purple_1"
+                android:orientation="vertical"
+                tools:context="com.example.aseproject.events.AddEvent"
+                tools:showIn="@layout/activity_event_create"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="24dp">
+
+                <TextView
+                    android:id="@+id/eventDetailsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawablePadding="8dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/eventDetailsTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/background_edittext"
+                    android:clickable="true"
+                    android:drawablePadding="8dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#808080"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/eventDetailsDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/background_edittext"
+                    android:clickable="true"
+                    android:drawablePadding="8dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#808080"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/eventDetailsLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawablePadding="8dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#808080"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/eventDetailsDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/background_edittext"
+                    android:drawablePadding="8dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#808080"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/btnEdit"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/background_button"
+                    android:text=" Edit Event "
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

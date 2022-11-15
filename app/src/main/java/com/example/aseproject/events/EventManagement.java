@@ -32,7 +32,7 @@ public class EventManagement extends AppCompatActivity {
         finish();
     }
 
-    public void onViewCreatedEventCardViewClick(View view) {
+    public void onViewEventCardViewClick(View view) {
         Intent intent = new Intent(EventManagement.this, ViewEvent.class)
                 .putExtra("date", localDate)
                 .putExtra("month", localMonth)

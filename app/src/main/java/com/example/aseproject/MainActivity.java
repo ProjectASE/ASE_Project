@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private String mCurrentId, mUserId;
     private String TAG = "TAG";
     private EditText editTextEmail, editTextPassword;
-    private TextView signInButton;
+    private Button signInButton;
     private TextView status;
     private TextView createAccountView;
 
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private void ininUI() {
         editTextEmail = (EditText) findViewById(R.id.emailField);
         editTextPassword = (EditText) findViewById(R.id.passwordField);
-        signInButton = (TextView) findViewById(R.id.signInButton);
+        signInButton = (Button) findViewById(R.id.signInButton);
         createAccountView = (TextView) findViewById(R.id.createAccountView);
     }
 

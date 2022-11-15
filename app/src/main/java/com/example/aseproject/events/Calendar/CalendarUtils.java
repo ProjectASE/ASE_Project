@@ -6,10 +6,13 @@ import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CalendarUtils
 {
     public static LocalDate selectedDate;
+
+    public static List<LocalDate> eventDates = new ArrayList<>();
 
     public static String formattedDate(LocalDate date)
     {
@@ -41,7 +44,7 @@ public class CalendarUtils
         return date.format(formatter);
     }
 
-    public static ArrayList<LocalDate> daysInMonthArray()
+   public static ArrayList<LocalDate> daysInMonthArray()
     {
         ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
 

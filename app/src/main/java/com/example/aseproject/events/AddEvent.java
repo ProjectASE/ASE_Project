@@ -1,8 +1,16 @@
 package com.example.aseproject.events;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -17,6 +25,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 
 import com.example.aseproject.R;
 import com.example.aseproject.UserHomepage;
@@ -89,7 +98,13 @@ public class AddEvent extends AppCompatActivity {
                         Toast.makeText(AddEvent.this, "Error, Try again.", Toast.LENGTH_SHORT).show();
                     }
                 });
-
+                Intent intent = new Intent(AddEvent.this, ReminderBroadcast.class);
+                intent.putExtra("title",eTitle).putExtra("body",eDescription);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(AddEvent.this,0,intent,0);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                long timeatButtonClick = System.currentTimeMillis();
+                long timeafterButtonClick = 1000 * 5;
+                alarmManager.set(AlarmManager.RTC_WAKEUP,timeatButtonClick + timeafterButtonClick,pendingIntent);
 
             }
         });
@@ -138,8 +153,21 @@ public class AddEvent extends AppCompatActivity {
         }, HOUR, MINUTE, is24HourFormat);
 
         timePickerDialog.show();
-
     }
+
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "ReminderChannel";
+            String desc = "Channel for Reminder";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notify",name,importance);
+            channel.setDescription(desc);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

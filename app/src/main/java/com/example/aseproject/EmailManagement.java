@@ -9,6 +9,7 @@ import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,18 +20,16 @@ import java.util.Map;
 
 public class EmailManagement extends AppCompatActivity {
 
-    TextView googleManageView;
-    TextView yahooManageView;
-    TextView outlookManageView;
+    ImageView googleManageView, yahooManageView, outlookManageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_management);
 
-        googleManageView = (TextView) findViewById(R.id.googleManage);
-        yahooManageView = (TextView) findViewById(R.id.yahooManage);
-        outlookManageView = (TextView) findViewById(R.id.outlookManage);
+        googleManageView = findViewById(R.id.googleManage);
+        yahooManageView = findViewById(R.id.yahooManage);
+        outlookManageView = findViewById(R.id.outlookManage);
 
         googleManageView.setOnClickListener(new View.OnClickListener() {
             @Override

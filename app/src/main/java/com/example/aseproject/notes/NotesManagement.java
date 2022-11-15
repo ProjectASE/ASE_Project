@@ -55,7 +55,7 @@ public class NotesManagement extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         notesArray = new ArrayList<>();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, notesArray);
+        adapter = new ArrayAdapter<String>(this, R.layout.simple_list_item, notesArray);
         listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();

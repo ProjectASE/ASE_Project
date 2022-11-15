@@ -4,6 +4,7 @@ import static com.example.aseproject.events.Calendar.CalendarUtils.daysInMonthAr
 import static com.example.aseproject.events.Calendar.CalendarUtils.monthYearFromDate;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -41,8 +42,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -52,14 +57,12 @@ import java.util.Random;
 public class ViewEvent extends AppCompatActivity implements CalendarAdapter.OnItemListener {
     RecyclerView eventLists;
     FirebaseFirestore fStore;
-    FirestoreRecyclerAdapter<Event,EventViewHolder> eventAdapter;
+    List<FirestoreRecyclerAdapter<Event,EventViewHolder>> eventAdapterList = new ArrayList<>();
     FirebaseUser user;
     FirebaseAuth fAuth;
     TextView monthYearText;
     RecyclerView calendarRecyclerView;
     String localDate, localMonth, localYear;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,14 +75,21 @@ public class ViewEvent extends AppCompatActivity implements CalendarAdapter.OnIt
         LocalDate ld = LocalDate.of(Integer.valueOf(localYear), Integer.valueOf(localMonth), Integer.valueOf(localDate));
         CalendarUtils.selectedDate = ld;
         setMonthView();
-        setEvents(localDate, localMonth, localYear);
-    }
 
-    private void setEvents(String date, String month, String year){
+
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
         user = fAuth.getCurrentUser();
-        Query query = fStore.collection("Events").document(user.getUid()).collection("myEvents")
+        for(int i = 0; i <= 30; i++){
+            FirestoreRecyclerAdapter eventAdapter = setAllEvents(String.valueOf(i+1), localMonth, localYear);
+            eventAdapterList.add(i,eventAdapter);
+        }
+        setEvents(eventAdapterList.get(ld.getDayOfMonth()-1));
+
+    }
+
+    private FirestoreRecyclerAdapter setAllEvents(String date, String month, String year) {
+       Query query = fStore.collection("Events").document(user.getUid()).collection("myEvents")
                 .whereEqualTo("date", date)
                 .whereEqualTo("month", month)
                 .whereEqualTo("year", year)
@@ -87,10 +97,10 @@ public class ViewEvent extends AppCompatActivity implements CalendarAdapter.OnIt
                 .orderBy("minute", Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<Event> allEvents = new FirestoreRecyclerOptions.Builder<Event>()
-                .setQuery(query,Event.class)
+                .setQuery(query, Event.class)
                 .build();
 
-        eventAdapter = new FirestoreRecyclerAdapter<Event, EventViewHolder>(allEvents) {
+        FirestoreRecyclerAdapter<Event,EventViewHolder> eventAdapter = new FirestoreRecyclerAdapter<Event, EventViewHolder>(allEvents) {
             @Override
             protected void onBindViewHolder(@NonNull EventViewHolder eventViewHolder, final int i, @NonNull final Event event) {
                 eventViewHolder.eventTitle.setText(event.getTitle());
@@ -103,8 +113,11 @@ public class ViewEvent extends AppCompatActivity implements CalendarAdapter.OnIt
                         Intent i = new Intent(v.getContext(), EventDetails.class);
                         i.putExtra("title",event.getTitle());
                         i.putExtra("location",event.getLocation());
-                        //i.putExtra("time",event.getTime());
-                        //i.putExtra("date",event.getDate());
+                        i.putExtra("hour",event.getHour());
+                        i.putExtra("minute",event.getMinute());
+                        i.putExtra("date",event.getDate());
+                        i.putExtra("month",event.getMonth());
+                        i.putExtra("year",event.getYear());
                         i.putExtra("description",event.getDescription());
                         i.putExtra("eventId",event.getId());
                         v.getContext().startActivity(i);
@@ -119,7 +132,9 @@ public class ViewEvent extends AppCompatActivity implements CalendarAdapter.OnIt
                 return new EventViewHolder(view);
             }
         };
-
+        return eventAdapter;
+    }
+    private void setEvents(FirestoreRecyclerAdapter eventAdapter) {
         eventLists = findViewById(R.id.eventlist);
         eventLists.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
         eventLists.setAdapter(eventAdapter);
@@ -185,6 +200,7 @@ public class ViewEvent extends AppCompatActivity implements CalendarAdapter.OnIt
         //setMonthView();
         changeDate(CalendarUtils.selectedDate);
     }
+
     private void changeDate(LocalDate date){
         localDate = String.valueOf(date.getDayOfMonth());
         localMonth = String.valueOf(date.getMonth().getValue());
@@ -196,27 +212,40 @@ public class ViewEvent extends AppCompatActivity implements CalendarAdapter.OnIt
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
         startActivity(intent);
     }
+    private void highlightEvents(){
+        for(int i = 0; i <= 30; i++) {
+            if (eventAdapterList.get(i).getItemCount() != 0){
+                CalendarUtils.eventDates.add(LocalDate.of(Integer.valueOf(localYear), Integer.valueOf(localMonth), i+1));
+            }
+        }
+    }
+
     @Override
     public void onItemClick(int position, LocalDate date) {
         if (date != null) {
-            /*CalendarUtils.selectedDate = date;
-            setMonthView();*/
-            changeDate(date);
+            //changeDate(date);
+            CalendarUtils.selectedDate = date;
+            setMonthView();
+            setEvents(eventAdapterList.get(date.getDayOfMonth()-1));
+            highlightEvents();
         }
     }
     @Override
     protected void onStart() {
         super.onStart();
-        eventAdapter.startListening();
+        for(int i = 0; i<=30;i++){
+            eventAdapterList.get(i).startListening();
+        }
     }
     @Override
     protected void onStop() {
         super.onStop();
-        if (eventAdapter != null) {
-            eventAdapter.stopListening();
+        for(int i = 0; i<=30;i++){
+            if (eventAdapterList.get(i) != null) {
+                eventAdapterList.get(i).stopListening();
+            }
         }
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
