@@ -91,7 +91,7 @@ public class ShowTodo extends AppCompatActivity {
         userMap.put("note", note);
         userMap.put("title", title);
 
-        fStore.collection("Notes").document(uid).collection("myNotes").document(id).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        fStore.collection("Todo").document(uid).collection("myTodo").document(id).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Log.d("data " , "updated");
@@ -109,7 +109,7 @@ public class ShowTodo extends AppCompatActivity {
         Toast.makeText(ShowTodo.this, "add", Toast.LENGTH_SHORT).show();
 
         // save note
-        CollectionReference colref = fStore.collection("Notes").document(user.getUid()).collection("myNotes");
+        CollectionReference colref = fStore.collection("Todo").document(user.getUid()).collection("myTodo");
         String eId = colref.document().getId();
         String title = note.split(" ")[0];
         if (title == null)

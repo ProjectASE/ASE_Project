@@ -29,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class UserHomepage extends AppCompatActivity {
 
-    ImageView emailManagementView, eventManagementView, notesManagementView, messageManagement, todoManagement, logout;
+    ImageView eventManagementView, notesManagementView, messageManagement, todoManagement, logout;
 
     static EditText input;
     @Override
@@ -39,19 +39,11 @@ public class UserHomepage extends AppCompatActivity {
 
         createNotificationChannel();
 
-        emailManagementView = findViewById(R.id.emailManagement);
         eventManagementView = findViewById(R.id.eventManagement);
         notesManagementView = findViewById(R.id.notesManagement);
         messageManagement = findViewById(R.id.messageManagement);
         todoManagement = findViewById(R.id.todoManagement);
         logout = findViewById(R.id.logout);
-
-        emailManagementView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openEmailManagement();
-            }
-        });
 
         eventManagementView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,10 +92,6 @@ public class UserHomepage extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
-    }
-
-    private void openEmailManagement() {
-        startActivity(new Intent(UserHomepage.this, EmailManagement.class));
     }
 
     private void openEventManagement() {

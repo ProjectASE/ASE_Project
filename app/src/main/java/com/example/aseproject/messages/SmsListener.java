@@ -55,7 +55,8 @@ public class SmsListener extends BroadcastReceiver {
 
 // The value will be default as empty string because for
 // the very first time when the app is opened, there is nothing to show
-                    String s1 = sh.getString("school_number", "");
+//                    String s1 = sh.getString("school_number", "");
+                    String s1 = "+15199928538";
                     //      int a = sh.getInt("age", 0);
 
 // We can then use the data
